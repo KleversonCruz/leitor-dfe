@@ -2,8 +2,15 @@ const converter = require('json-2-csv');
 
 const options = {
   delimiter: {
-    field: ';',
+    wrap: '"',
+    field: ',',
+    eol: '\n',
   },
+  prependHeader: true,
+  sortHeader: false,
+  excelBOM: true,
+  trimHeaderValues: true,
+  trimFieldValues: true,
 };
 
 export class jsonParser {

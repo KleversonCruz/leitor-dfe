@@ -1,4 +1,4 @@
-export interface Row {
+export interface ItemRow {
   CNPJ: string;
   xNome: string;
   cNF: string;

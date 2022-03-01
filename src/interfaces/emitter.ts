@@ -3,7 +3,7 @@ export interface Emitter {
   xNome: string;
   xFant: string;
   IE?: string;
-  cRegTrib: string;
+  cRegTrib?: string;
 
   enderEmit: {
     xLgr: string;

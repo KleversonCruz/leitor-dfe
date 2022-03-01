@@ -1,5 +1,5 @@
-import { DfeController } from './controllers/dfe-controller';
 import { errorHandler } from './middlewares/error-handler';
+import { routes } from './routes';
 
 const express = require('express');
 const fileUpload = require('express-fileupload');
@@ -16,7 +16,8 @@ app.use(
   }),
 );
 
-app.post('/upload', DfeController.readArrayDocuments);
+
+routes(app);
 
 app.use(errorHandler);
 

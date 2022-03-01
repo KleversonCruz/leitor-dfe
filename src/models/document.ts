@@ -1,26 +1,26 @@
 import { Detail } from '../interfaces/detail';
 import { Emitter } from '../interfaces/emitter';
 import { Item } from '../interfaces/item';
-import { Row } from '../interfaces/report/row';
-import { XmlFile } from '../interfaces/xml-file';
+import { ItemRow } from '../interfaces/report/item-row';
+import { AttachmentFile } from '../interfaces/attachment-file';
 import { XmlParser } from '../utils/xml-parser';
 
 export class Document {
   constructor(
-    public readonly emitent: Emitter,
-    public readonly items: Item[],
-    public readonly datail: Detail,
+    public emitent: Emitter,
+    public datail: Detail,
+    public items: Item[] = [],
   ) {}
 
-  public static createFromFile(xmlFile: XmlFile): Document {
+  public static createFromFile(xmlFile: AttachmentFile): Document {
     return XmlParser.toJs(xmlFile);
   }
 
-  public rows(): Row[] {
-    const rows: Row[] = [];
+  public rows(): ItemRow[] {
+    const rows: ItemRow[] = [];
 
     this.items.forEach((item) => {
-      const row: Row = {
+      const row: ItemRow = {
         CNPJ: this.emitent.CNPJ,
         xNome: this.emitent.xNome,
         cNF: this.datail.cNF,
