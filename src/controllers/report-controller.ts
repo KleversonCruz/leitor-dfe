@@ -1,8 +1,9 @@
-import { Document } from '../models/document';
-import { Documents } from '../models/documents';
+import { Dfes } from '../models/dfes';
 import { Request, Response, NextFunction } from 'express';
 import { BadRequest } from '../errors/bad-request';
 import { AttachmentFile } from '../interfaces/attachment-file';
+import { XmlParser } from '../utils/xml-parser';
+import { Report } from '../models/report';
 
 interface uploadRequest extends Request {
   files: any;
@@ -19,11 +20,11 @@ export class ReportController {
 
       const { xml: files } = req.files;
       const documents = getDocumentsFromFiles(files);
-      const csv = await documents.report.items();
+      const report = await new Report(documents).items();
 
       const attachment: AttachmentFile = {
         name: 'report.csv',
-        data: Buffer.from(csv),
+        data: Buffer.from(report),
         mimetype: 'text/csv',
       };
       writeHeader(res, attachment);
@@ -44,11 +45,11 @@ export class ReportController {
 
       const { xml: files } = req.files;
       const documents = getDocumentsFromFiles(files);
-      const csv = await documents.report.details();
+      const report = await new Report(documents).details();
 
       const attachment: AttachmentFile = {
         name: 'report.csv',
-        data: Buffer.from(csv),
+        data: Buffer.from(report),
         mimetype: 'text/csv',
       };
       writeHeader(res, attachment);
@@ -66,8 +67,8 @@ function checkIfExistFilesInRequest(req: uploadRequest) {
   }
 }
 
-function getDocumentsFromFiles(files: any): Documents {
-  const documents = new Documents();
+function getDocumentsFromFiles(files: any): Dfes {
+  const documents = new Dfes();
   const xmlFiles = Array.isArray(files) ? files : [files];
 
   xmlFiles.forEach((file: AttachmentFile) => {
@@ -75,7 +76,8 @@ function getDocumentsFromFiles(files: any): Documents {
       throw new BadRequest(`O arquivo ${file.name} não é um XML válido`);
     }
 
-    const document = Document.createFromFile(file);
+    const document = XmlParser.toJs(file);
+
     documents.add(document);
   });
   return documents;

@@ -1,0 +1,21 @@
+export enum ReportKeys {
+  status = 'detail.status',
+  id = 'detail.id',
+  cNF = 'detail.cNF',
+  cUF = 'detail.cUF',
+  dEmi = 'detail.dEmi',
+  mod = 'detail.mod',
+  vCFe = 'detail.vCFe',
+  CNPJ = 'emitter.CNPJ',
+  xNome = 'emitter.xNome',
+
+  nItem = 'items.nItem',
+  cProd = 'items.cProd',
+  xProd = 'items.xProd',
+  uCom = 'items.uCom',
+  qCom = 'items.qCom',
+  vUnCom = 'items.vUnCom',
+  vItem = 'items.vItem',
+  NCM = 'items.NCM',
+  CFOP = 'items.CFOP',
+}

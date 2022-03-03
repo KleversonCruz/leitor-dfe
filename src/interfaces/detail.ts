@@ -1,7 +1,5 @@
-import { Situacoes } from '../enums/situacoes';
-
 export interface Detail {
-  situacao: Situacoes;
+  status?: string;
   id: string;
   cUF: string;
   cNF: string;
@@ -12,4 +10,5 @@ export interface Detail {
   hEmi: string;
   cDV: string;
   tpAmb?: string;
+  vCFe?: string;
 }

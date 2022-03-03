@@ -1,4 +1,4 @@
-export enum Estados {
+export enum BrasilUfs {
   'RO' = 11,
   'AC' = 12,
   'AM' = 13,
