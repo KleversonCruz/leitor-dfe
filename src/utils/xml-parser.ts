@@ -1,7 +1,7 @@
 import { BadRequest } from '../errors/bad-request';
 import { AttachmentFile } from '../interfaces/attachment-file';
-import { Document } from '../models/document';
-import { Mapping } from './mapping';
+import { CFeMapping } from '../mappings/cfe-mapping';
+import { Dfe } from '../models/dfe';
 
 const converter = require('xml-js');
 
@@ -12,18 +12,19 @@ const options = {
 };
 
 export class XmlParser {
-  public static toJs(xmlFile: AttachmentFile): Document {
+  public static toJs(xmlFile: AttachmentFile): Dfe {
     const buffer = xmlFile.data.toString();
 
     const json = converter.xml2js(buffer, options);
 
     if (json.CFe) {
-      return Mapping.cfe(json.CFe.infCFe);
+      const mapping = new CFeMapping(json.CFe.infCFe);
+      return new Dfe(mapping);
     }
     if (json.CFeCanc) {
-      return Mapping.cfeCanc(json.CFeCanc.infCFe);
+      const mapping = new CFeMapping(json.CFeCanc.infCFe);
+      return new Dfe(mapping);
     }
-
     throw new BadRequest(`O arquivo ${xmlFile.name} não é um XML válido`);
   }
 }

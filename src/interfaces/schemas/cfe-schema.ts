@@ -1,6 +1,7 @@
 export interface CfeSchema {
   _attributes: {
     Id: string;
+    chCanc?: string;
   };
   ide: {
     cUF: { text: string };
@@ -46,17 +47,17 @@ export interface CfeSchema {
         vProd: { text: string };
         indRegra: { text: string };
         vItem: { text: string };
-        obsFiscoDet: { text: string };
       };
       imposto: {
-        vItem12741: [Object];
-        ICMS: [Object];
-        PIS: [Object];
-        COFINS: [Object];
+        ICMS: { text: string };
+        PIS: { text: string };
+        COFINS: { text: string };
       };
     },
   ];
-  total: { ICMSTot: [Object]; vCFe: [Object]; vCFeLei12741: [Object] };
-  pgto: { MP: [Object]; vTroco: [Object] };
-  infAdic: { infCpl: [Object]; obsFisco: [Object] };
+  total: {
+    ICMSTot: { text: string };
+    vCFe: { text: string };
+  };
+  pgto: { MP: { text: string }; vTroco: { text: string } };
 }
