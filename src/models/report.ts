@@ -1,5 +1,5 @@
-import { ReportKeys } from '../enums/report-keys';
 import { ReportOptions } from '../interfaces/report-options';
+import { ReportMapping } from '../mappings/report-mapping';
 import { jsonParser } from '../utils/json-parser';
 import { Dfes } from './dfes';
 
@@ -14,51 +14,35 @@ export class Report {
     },
     trimHeaderFields: true,
     emptyFieldValue: '',
+    keys: ReportMapping.getKeys(),
   };
 
-  public details() {
-    this.options.keys = [
-      ReportKeys.mod,
-      ReportKeys.status,
-      ReportKeys.id,
-      ReportKeys.cNF,
-      ReportKeys.dEmi,
-      ReportKeys.CNPJ,
-      ReportKeys.xNome,
-      ReportKeys.cUF,
-      ReportKeys.vCFe
-    ];
-    const rows = this.documents.list().flat();
-    return jsonParser.toCsv(rows, this.options);
+  private setKeys(keys: string[]) {
+    if (keys.filter(Boolean).length > 0) {
+      this.options.keys = keys.map((key) => {
+        return ReportMapping.getKey(key);
+      });
+    }
   }
 
-  public items() {
-    this.options = {
-      keys: [
-        ReportKeys.mod,
-        ReportKeys.status,
-        ReportKeys.id,
-        ReportKeys.cNF,
-        ReportKeys.dEmi,
-        ReportKeys.CNPJ,
-        ReportKeys.xNome,
-        ReportKeys.cUF,
+  private setExcludeKeys(keys: string[]) {
+    if (keys.filter(Boolean).length > 0) {
+      this.options.excludeKeys = keys.map((key) => {
+        return ReportMapping.getKey(key).field;
+      });
+    }
+  }
 
-        ReportKeys.nItem,
-        ReportKeys.cProd,
-        ReportKeys.xProd,
-        ReportKeys.uCom,
-        ReportKeys.qCom,
-        ReportKeys.vUnCom,
-        ReportKeys.vItem,
-        ReportKeys.NCM,
-        ReportKeys.CFOP,
-      ],
-      unwindArrays: true,
-    };
+  public generate(
+    keys: string[] = [],
+    excludeKeys: string[] = [],
+    unwindArrays = false,
+  ) {
+    this.setKeys(keys);
+    this.setExcludeKeys(excludeKeys);
+    this.options.unwindArrays = unwindArrays;
 
-    const rows = this.documents.list();
-
-    return jsonParser.toCsv(rows.flat(), this.options);
+    const rows = this.documents.list().flat();
+    return jsonParser.toCsv(rows, this.options);
   }
 }

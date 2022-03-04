@@ -10,17 +10,25 @@ interface uploadRequest extends Request {
 }
 
 export class ReportController {
-  public static async documentsItems(
+  public static async generateReport(
     req: uploadRequest,
     res: Response,
     next: NextFunction,
   ) {
     try {
       checkIfExistFilesInRequest(req);
+      const keys = getKeysArray(req.body?.keys);
+      const excludeKeys = getKeysArray(req.body?.excludeKeys);
+      const unwindArrays = req.body?.unwindArrays;
 
       const { xml: files } = req.files;
+
       const documents = getDocumentsFromFiles(files);
-      const report = await new Report(documents).items();
+      const report = await new Report(documents).generate(
+        keys,
+        excludeKeys,
+        unwindArrays,
+      );
 
       const attachment: AttachmentFile = {
         name: 'report.csv',
@@ -34,31 +42,13 @@ export class ReportController {
       next(error);
     }
   }
+}
 
-  public static async documentsDetails(
-    req: uploadRequest,
-    res: Response,
-    next: NextFunction,
-  ) {
-    try {
-      checkIfExistFilesInRequest(req);
-
-      const { xml: files } = req.files;
-      const documents = getDocumentsFromFiles(files);
-      const report = await new Report(documents).details();
-
-      const attachment: AttachmentFile = {
-        name: 'report.csv',
-        data: Buffer.from(report),
-        mimetype: 'text/csv',
-      };
-      writeHeader(res, attachment);
-
-      res.end(attachment.data);
-    } catch (error) {
-      next(error);
-    }
+function getKeysArray(keys: any) {
+  if (!keys) {
+    return [];
   }
+  return keys.replace(/\s/g, '').split(',');
 }
 
 function checkIfExistFilesInRequest(req: uploadRequest) {
