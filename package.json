@@ -2,7 +2,7 @@
   "name": "dfe-reader-nodejs",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/app.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node dist/app.js",
