@@ -1,13 +1,14 @@
-import { Dfe } from './dfe';
+import { DfeModel } from "../interfaces/dfe-model";
+
 
 export class Dfes {
-  private documents: Dfe[] = [];
+  private documents: DfeModel[] = [];
 
   public add(document: any) {
     this.documents.push(document);
   }
 
-  public list(): readonly Dfe[] {
+  public list(): readonly DfeModel[] {
     return this.documents;
   }
 }

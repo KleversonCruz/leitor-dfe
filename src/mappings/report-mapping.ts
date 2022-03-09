@@ -1,28 +1,33 @@
 export class ReportMapping {
   private static keys: any = {
-    status: { field: 'detail.status', title: 'status' },
-    id: { field: 'detail.id', title: 'id' },
-    cNF: { field: 'detail.cNF', title: 'cNF' },
-    cUF: { field: 'detail.cUF', title: 'cUF' },
-    dEmi: { field: 'detail.dEmi', title: 'dEmi' },
-    mod: { field: 'detail.mod', title: 'mod' },
-    vCFe: { field: 'detail.vCFe', title: 'vCFe' },
-    CNPJ: { field: 'emitter.CNPJ', title: 'CNPJ' },
-    xNome: { field: 'emitter.xNome', title: 'xNome' },
+    emitCNPJ: { field: 'emit.emitCNPJ', title: 'emitCNPJ' },
+    emitNome: { field: 'emit.emitNome', title: 'emitNome' },
+    emitMun: { field: 'emit.emitMun', title: 'emitMun' },
 
-    nItem: { field: 'items.nItem', title: 'nItem' },
-    cProd: { field: 'items.cProd', title: 'cProd' },
-    xProd: { field: 'items.xProd', title: 'xProd' },
-    uCom: { field: 'items.uCom', title: 'uCom' },
-    qCom: { field: 'items.qCom', title: 'qCom' },
-    vUnCom: { field: 'items.vUnCom', title: 'vUnCom' },
-    vItem: { field: 'items.vItem', title: 'vItem' },
-    NCM: { field: 'items.NCM', title: 'NCM' },
-    CFOP: { field: 'items.CFOP', title: 'CFOP' },
+    status: { field: 'ide.status', title: 'status' },
+    mod: { field: 'ide.modelo', title: 'mod' },
+    nNF: { field: 'ide.nNF', title: 'nNF' },
+    serie: { field: 'ide.serie', title: 'serie' },
+    chave: { field: 'ide.chave', title: 'chave' },
+    dtEmissao: { field: 'ide.dtEmissao', title: 'dtEmissao' },
+    vDocumento: { field: 'ide.vDocumento', title: 'vDocumento' },
+
+    destCPFCNPJ: { field: 'dest.destNome', title: 'destNome' },
+    destNome: { field: 'dest.destNome', title: 'destNome' },
+
+    itemEAN: { field: 'items.itemEAN', title: 'itemEAN' },
+    itemDescricao: { field: 'items.itemDescricao', title: 'itemDescricao' },
+    itemUnidade: { field: 'items.itemUnidade', title: 'itemUnidade' },
+    itemQuantidade: { field: 'items.itemQuantidade', title: 'itemQuantidade' },
+    itemVUnit: { field: 'items.itemVUnit', title: 'itemVUnit' },
+    itemVDesc: { field: 'items.itemVDesc', title: 'itemVDesc' },
+    itemVTotal: { field: 'items.itemVTotal', title: 'itemVTotal' },
+    itemNCM: { field: 'items.itemNCM', title: 'itemNCM' },
+    itemCFOP: { field: 'items.itemCFOP', title: 'itemCFOP' },
   };
 
   public static getKey(key: string) {
-    return this.keys[key];
+    return this.keys[key] || '';
   }
 
   public static getKeys() {

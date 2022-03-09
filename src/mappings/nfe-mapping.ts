@@ -2,40 +2,41 @@ import { Ide } from '../interfaces/ide';
 import { Emit } from '../interfaces/emit';
 import { Item } from '../interfaces/item';
 import { DfeModel } from '../interfaces/dfe-model';
-import { CfeSchema } from '../interfaces/schemas/cfe-schema';
+import { NfeSchema } from '../interfaces/schemas/nfe-schema';
 import { Dest } from '../interfaces/dest';
 
-export class CFeMapping implements DfeModel {
+export class NFeMapping implements DfeModel {
   public ide: Ide;
   public emit: Emit;
   public dest: Dest;
   public items: Item[] = [];
 
-  constructor(model: CfeSchema) {
+  constructor(model: NfeSchema) {
     this.map(model);
   }
 
-  private map(model: CfeSchema) {
+  private map(model: NfeSchema) {
     this.ide = {
       chave: model._attributes.Id,
-      serie: model.ide.nserieSAT?.text,
-      status: model._attributes?.chCanc ? 'CANCELADO' : 'AUTORIZADO',
-      nNF: model.ide?.cNF?.text,
+      serie: model.ide.serie?.text,
+      status: 'AUTORIZADA',
+      nNF: model.ide.cNF?.text,
       modelo: model.ide.mod?.text,
-      dtEmissao: model.ide.dEmi?.text,
-      vDocumento: model.total.vCFe?.text,
+      dtEmissao: model.ide.dhEmi?.text,
+      vDocumento: model.total.ICMSTot.vNF?.text,
     };
-
     this.emit = {
       emitCNPJ: model.emit.CNPJ?.text,
       emitNome: model.emit.xNome?.text,
       emitMun: model.emit.enderEmit.xMun?.text,
-      emitUF: model.ide.cUF?.text,
+      emitUF: model.emit.enderEmit.UF?.text,
     };
 
     this.dest = {
-      destCPFCNPJ: model.dest.CNPJ?.text ?? model.dest.CPF?.text,
-      destNome: model.dest.xNome?.text,
+      destCPFCNPJ: model.dest?.CNPJ?.text ?? model.dest?.CPF?.text,
+      destNome: model.dest?.xNome?.text,
+      destMun: model.dest?.enderDest.xMun?.text,
+      destUF: model.dest?.enderDest.UF?.text,
     };
 
     if (!model.det) {

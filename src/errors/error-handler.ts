@@ -1,4 +1,4 @@
-import { BadRequest } from '../errors/bad-request';
+import { BadRequest } from './bad-request';
 import { Request, Response, NextFunction } from 'express';
 
 export function errorHandler(

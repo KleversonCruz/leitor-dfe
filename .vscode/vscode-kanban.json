@@ -1,0 +1,18 @@
+{
+  "todo": [
+    {
+      "assignedTo": {
+        "name": "Kleverson Marinho"
+      },
+      "category": "Implementação",
+      "creation_time": "2022-03-04T03:40:27.693Z",
+      "id": "1",
+      "prio": 1,
+      "references": [],
+      "title": "Inclusão de mapping NFe"
+    }
+  ],
+  "in-progress": [],
+  "testing": [],
+  "done": []
+}

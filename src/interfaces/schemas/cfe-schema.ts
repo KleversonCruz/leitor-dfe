@@ -33,11 +33,17 @@ export interface CfeSchema {
     cRegTrib: { text: string };
     indRatISSQN: { text: string };
   };
+  dest: {
+    CNPJ: { text: string };
+    CPF: { text: string };
+    xNome: { text: string };
+  };
   det: [
     {
       _attributes: { nItem: string };
       prod: {
         cProd: { text: string };
+        cEAN: { text: string };
         xProd: { text: string };
         NCM: { text: string };
         CFOP: { text: string };
