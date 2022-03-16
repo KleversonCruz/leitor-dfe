@@ -51,8 +51,10 @@ Realize as requisições em [http://localhost:3000](http://localhost:3000) para 
 ### Paramêtros
 
 * `xml` - Um ou mais arquivos XML a serem convertidos para CSV.
-* `keys` - (Opcional) Array separado por vingulas de campos a serem gerados no relatório(emitCNPJ,emitNome,emitMun...).
-* `excludeKeys` - (Opcional) Array separado por vingulas de campos que não serão gerados no relatório(emitCNPJ,emitNome,emitMun...).
+* `keys` - (Opcional) Array separado por vingulas de campos a serem gerados no relatório.
+    * `emitCNPJ, emitNome, ...`
+* `excludeKeys` - (Opcional) Array separado por vingulas de campos que não serão gerados no relatório
+    * `emitCNPJ, emitNome, ...`
 * `fieldDelimiter` - (Opcional) Define qual o delimitador utilizado no CSV
     * default: `,`
 * `unwindArrays` - (Opcional) Boolean - Define se deve ser gerado com multiplas linhas para arrays de items nos documentos
