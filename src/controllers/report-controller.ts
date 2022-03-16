@@ -20,6 +20,7 @@ export class ReportController {
       const keys = getKeysArray(req.body?.keys);
       const excludeKeys = getKeysArray(req.body?.excludeKeys);
       const unwindArrays = req.body?.unwindArrays;
+      const fieldDelimiter = req.body?.fieldDelimiter;
 
       const { xml: files } = req.files;
 
@@ -28,6 +29,7 @@ export class ReportController {
         keys,
         excludeKeys,
         unwindArrays,
+        fieldDelimiter,
       );
 
       const attachment: AttachmentFile = {

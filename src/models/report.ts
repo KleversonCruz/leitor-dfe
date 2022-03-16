@@ -15,6 +15,8 @@ export class Report {
     trimHeaderFields: true,
     emptyFieldValue: '',
     keys: ReportMapping.getKeys(),
+    excelBOM: true,
+    preventCsvInjection: true,
   };
 
   private setKeys(keys: string[]) {
@@ -37,10 +39,14 @@ export class Report {
     keys: string[] = [],
     excludeKeys: string[] = [],
     unwindArrays = false,
+    fieldDelimiter = ',',
   ) {
     this.setKeys(keys);
     this.setExcludeKeys(excludeKeys);
     this.options.unwindArrays = unwindArrays;
+    this.options.delimiter = {
+      field: fieldDelimiter,
+    };
 
     const rows = this.documents.list().flat();
     return jsonParser.toCsv(rows, this.options);

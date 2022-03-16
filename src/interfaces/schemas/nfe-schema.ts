@@ -1,134 +1,162 @@
 export interface NfeSchema {
   _attributes: {
-    Id: string;
+    id: string;
   };
   ide: {
-    cUF: { text: string };
-    cNF: { text: string };
-    natOp: { text: string };
-    mod: { text: string };
-    serie: { text: string };
-    nNF: { text: string };
-    dhEmi: { text: string };
-    dhSaiEnt: { text: string };
-    tpNF: { text: string };
-    idDest: { text: string };
-    cMunFG: { text: string };
-    tpImp: { text: string };
-    tpEmis: { text: string };
-    cDV: { text: string };
-    tpAmb: { text: string };
-    finNFe: { text: string };
-    indFinal: { text: string };
-    indPres: { text: string };
-    procEmi: { text: string };
-    verProc: { text: string };
+    cuf: string;
+    cnf: string;
+    natop: string;
+    mod: string;
+    serie: string;
+    nnf: string;
+    dhemi: string;
+    dhsaient: string;
+    tpnf: string;
+    iddest: string;
+    cmunfg: string;
+    tpimp: string;
+    tpemis: string;
+    cdv: string;
+    tpamb: string;
+    finnfe: string;
+    indfinal: string;
+    indpres: string;
+    procemi: string;
+    verproc: string;
   };
   emit: {
-    CNPJ: { text: string };
-    xNome: { text: string };
-    xFant: { text: string };
-    enderEmit: {
-      xLgr: { text: string };
-      xCpl: { text: string };
-      nro: { text: string };
-      xBairro: { text: string };
-      cMun: { text: string };
-      xMun: { text: string };
-      UF: { text: string };
-      CEP: { text: string };
-      cPais: { text: string };
-      xPais: { text: string };
-      fone: { text: string };
+    cnpj: string;
+    xnome: string;
+    xfant: string;
+    enderemit: {
+      xlgr: string;
+      xcpl: string;
+      nro: string;
+      xbairro: string;
+      cmun: string;
+      xmun: string;
+      uf: string;
+      cep: string;
+      cpais: string;
+      xpais: string;
+      fone: string;
     };
-    IE: { text: string };
-    CRT: { text: string };
+    ie: string;
+    crt: string;
   };
   dest: {
-    CPF: { text: string };
-    CNPJ: { text: string };
-    xNome: { text: string };
-    enderDest: {
-      xLgr: { text: string };
-      nro: { text: string };
-      xBairro: { text: string };
-      cMun: { text: string };
-      xMun: { text: string };
-      xCpl: { text: string };
-      UF: { text: string };
-      CEP: { text: string };
-      cPais: { text: string };
-      xPais: { text: string };
-      fone: { text: string };
+    cpf: string;
+    cnpj: string;
+    xnome: string;
+    enderdest: {
+      xlgr: string;
+      nro: string;
+      xbairro: string;
+      cmun: string;
+      xmun: string;
+      xcpl: string;
+      uf: string;
+      cep: string;
+      cpais: string;
+      xpais: string;
+      fone: string;
     };
-    indIEDest: { text: string };
-    email: { text: string };
+    indiedest: string;
+    email: string;
   };
-  det: [
-    {
-      _attributes: { nItem: string };
-      prod: {
-        cProd: { text: string };
-        cEAN: { text: string };
-        xProd: { text: string };
-        NCM: { text: string };
-        CFOP: { text: string };
-        uCom: { text: string };
-        qCom: { text: string };
-        vUnCom: { text: string };
-        vProd: { text: string };
-        cEANTrib: { text: string };
-        uTrib: { text: string };
-        qTrib: { text: string };
-        vUnTrib: { text: string };
-        indTot: { text: string };
-      };
-      imposto: {
-        vTotTrib: { text: string };
-        ICMS: { text: string };
-        PIS: { text: string };
-        COFINS: { text: string };
-      };
-    },
-  ];
+  det: DetSchema[];
   total: {
-    ICMSTot: {
-      vBC: { text: string };
-      vICMS: { text: string };
-      vICMSDeson: { text: string };
-      vFCPUFDest: { text: string };
-      vICMSUFDest: { text: string };
-      vICMSUFRemet: { text: string };
-      vFCP: { text: string };
-      vBCST: { text: string };
-      vST: { text: string };
-      vFCPST: { text: string };
-      vFCPSTRet: { text: string };
-      vProd: { text: string };
-      vFrete: { text: string };
-      vSeg: { text: string };
-      vDesc: { text: string };
-      vII: { text: string };
-      vIPI: { text: string };
-      vIPIDevol: { text: string };
-      vPIS: { text: string };
-      vCOFINS: { text: string };
-      vOutro: { text: string };
-      vNF: { text: string };
-      vTotTrib: { text: string };
+    icmstot: {
+      vbc: string;
+      vicms: string;
+      vicmsdeson: string;
+      vfcpufdest: string;
+      vicmsufdest: string;
+      vicmsufremet: string;
+      vfcp: string;
+      vbcst: string;
+      vst: string;
+      vfcpst: string;
+      vfcpstret: string;
+      vprod: string;
+      vfrete: string;
+      vseg: string;
+      vdesc: string;
+      vii: string;
+      vipi: string;
+      vipidevol: string;
+      vpis: string;
+      vcofins: string;
+      voutro: string;
+      vnf: string;
+      vtottrib: string;
     };
   };
   transp: {
-    modFrete: { text: string };
+    modfrete: string;
     vol: {
-      qVol: { text: string };
+      qvol: string;
     };
   };
   pag: {
-    detPag: {
-      tPag: { text: string };
-      vPag: { text: string };
+    detpag: {
+      tpag: string;
+      vpag: string;
     };
   };
-  infAdic: { infAdFisco: { text: string } };
+  infadic: { infadfisco: string };
+}
+
+export interface DetSchema {
+  _attributes: { nitem: string };
+  prod: {
+    cprod: string;
+    cean: string;
+    xprod: string;
+    ncm: string;
+    cfop: string;
+    ucom: string;
+    qcom: string;
+    vuncom: string;
+    vprod: string;
+    vdesc: string;
+    ceantrib: string;
+    utrib: string;
+    qtrib: string;
+    vuntrib: string;
+    indtot: string;
+  };
+  imposto: {
+    vtottrib: string;
+    icms: {
+      icms: {
+        orig: string;
+        cst: string;
+      };
+      icmspart: {
+        orig: string;
+        cst: string;
+      };
+      icmsst: {
+        orig: string;
+        cst: string;
+      };
+      icmssn: {
+        orig: string;
+        csosn: string;
+      };
+    };
+    pis: {
+      pisaliq: { cst: string };
+      pisqtde: { cst: string };
+      pisnt: { cst: string };
+      pisoutr: { cst: string };
+    };
+    cofins: {
+      cofinsaliq: { cst: string };
+      cofinsqtde: { cst: string };
+      cofinsnt: { cst: string };
+      cofinsoutr: { cst: string };
+    };
+  };
 }

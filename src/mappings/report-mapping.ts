@@ -12,7 +12,7 @@ export class ReportMapping {
     dtEmissao: { field: 'ide.dtEmissao', title: 'dtEmissao' },
     vDocumento: { field: 'ide.vDocumento', title: 'vDocumento' },
 
-    destCPFCNPJ: { field: 'dest.destNome', title: 'destNome' },
+    destCPFCNPJ: { field: 'dest.destCPFCNPJ', title: 'destCPFCNPJ' },
     destNome: { field: 'dest.destNome', title: 'destNome' },
 
     itemEAN: { field: 'items.itemEAN', title: 'itemEAN' },
@@ -24,6 +24,10 @@ export class ReportMapping {
     itemVTotal: { field: 'items.itemVTotal', title: 'itemVTotal' },
     itemNCM: { field: 'items.itemNCM', title: 'itemNCM' },
     itemCFOP: { field: 'items.itemCFOP', title: 'itemCFOP' },
+    itemCSTPIS: { field: 'items.itemCSTPIS', title: 'itemCSTPIS' },
+    itemCSTCOFINS: { field: 'items.itemCSTCOFINS', title: 'itemCSTCOFINS' },
+    itemICMSCST: { field: 'items.itemICMSCST', title: 'itemICMSCST' },
+    itemICMSOrig: { field: 'items.itemICMSOrig', title: 'itemICMSOrig' },
   };
 
   public static getKey(key: string) {

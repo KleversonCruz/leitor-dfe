@@ -1,5 +1,4 @@
-import { DfeModel } from "../interfaces/dfe-model";
-
+import { DfeModel } from '../interfaces/dfe-model';
 
 export class Dfes {
   private documents: DfeModel[] = [];

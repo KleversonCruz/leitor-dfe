@@ -4,13 +4,28 @@ import { DfeModel } from '../interfaces/dfe-model';
 import { CFeMapping } from '../mappings/cfe-mapping';
 import { NFeMapping } from '../mappings/nfe-mapping';
 
-
 const converter = require('xml-js');
+
+function removeJsonTextAttribute(val: string, parentElement: any) {
+  try {
+    var keyNo = Object.keys(parentElement._parent).length;
+    var keyName = Object.keys(parentElement._parent)[keyNo - 1];
+
+    parentElement._parent[keyName] = val;
+  } catch (e) {}
+}
+
+function formatElementName(val: string) {
+  return val.replace(/^(ICMS|ICMSSN)\d+$/gi, '$1').toLowerCase();
+}
 
 const options = {
   compact: true,
-  spaces: 4,
-  textKey: 'text',
+  elementNameFn: formatElementName,
+  attributeNameFn: function (val: string) {
+    return val.toLowerCase();
+  },
+  textFn: removeJsonTextAttribute,
 };
 
 export class XmlParser {
@@ -19,22 +34,21 @@ export class XmlParser {
 
     const json = converter.xml2js(buffer, options);
     
-    if (json.CFe) {
-      const mapping = new CFeMapping(json.CFe.infCFe);      
-       return mapping;
+    if (json.cfe) {
+      const mapping = new CFeMapping(json.cfe.infcfe);
+      return mapping;
     }
-    if (json.CFeCanc) {
-      const mapping = new CFeMapping(json.CFeCanc.infCFe);
+    if (json.cfecanc) {
+      const mapping = new CFeMapping(json.cfecanc.infcfe);
       return mapping;
     }
 
-    if (json.nfeProc) {
-      const mapping = new NFeMapping(json.nfeProc.NFe.infNFe);
+    if (json.nfeproc) {
+      const mapping = new NFeMapping(json.nfeproc.nfe.infnfe);
       return mapping;
     }
-
-    if (json.NFe) {
-      const mapping = new NFeMapping(json.NFe.infNFe);
+    if (json.nfe) {
+      const mapping = new NFeMapping(json.nfe.infnfe);
       return mapping;
     }
 

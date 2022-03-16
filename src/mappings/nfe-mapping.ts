@@ -2,8 +2,9 @@ import { Ide } from '../interfaces/ide';
 import { Emit } from '../interfaces/emit';
 import { Item } from '../interfaces/item';
 import { DfeModel } from '../interfaces/dfe-model';
-import { NfeSchema } from '../interfaces/schemas/nfe-schema';
+import { DetSchema, NfeSchema } from '../interfaces/schemas/nfe-schema';
 import { Dest } from '../interfaces/dest';
+import { Formatter } from '../utils/formatter';
 
 export class NFeMapping implements DfeModel {
   public ide: Ide;
@@ -17,26 +18,28 @@ export class NFeMapping implements DfeModel {
 
   private map(model: NfeSchema) {
     this.ide = {
-      chave: model._attributes.Id,
-      serie: model.ide.serie?.text,
-      status: 'AUTORIZADA',
-      nNF: model.ide.cNF?.text,
-      modelo: model.ide.mod?.text,
-      dtEmissao: model.ide.dhEmi?.text,
-      vDocumento: model.total.ICMSTot.vNF?.text,
+      chave: model._attributes.id,
+      serie: model.ide.serie,
+      status: 'AUTORIZADO',
+      nNF: model.ide.cnf,
+      modelo: model.ide.mod,
+      dtEmissao: Formatter.toLocaleDate(model.ide.dhemi),
+      vDocumento: Formatter.toBrlCurrency(+model.total.icmstot.vnf),
     };
     this.emit = {
-      emitCNPJ: model.emit.CNPJ?.text,
-      emitNome: model.emit.xNome?.text,
-      emitMun: model.emit.enderEmit.xMun?.text,
-      emitUF: model.emit.enderEmit.UF?.text,
+      emitCNPJ: Formatter.toCpfCnpjMask(model.emit.cnpj),
+      emitNome: model.emit.xnome,
+      emitMun: model.emit.enderemit.xmun,
+      emitUF: model.emit.enderemit.uf,
     };
 
     this.dest = {
-      destCPFCNPJ: model.dest?.CNPJ?.text ?? model.dest?.CPF?.text,
-      destNome: model.dest?.xNome?.text,
-      destMun: model.dest?.enderDest.xMun?.text,
-      destUF: model.dest?.enderDest.UF?.text,
+      destCPFCNPJ: Formatter.toCpfCnpjMask(
+        model.dest?.cnpj ?? model.dest?.cpf,
+      ),
+      destNome: model.dest?.xnome,
+      destMun: model.dest?.enderdest.xmun,
+      destUF: model.dest?.enderdest.uf,
     };
 
     if (!model.det) {
@@ -45,17 +48,37 @@ export class NFeMapping implements DfeModel {
 
     const det: any[] = Array.isArray(model.det) ? model.det : [model.det];
 
-    det.forEach((modelItem) => {
+    det.forEach((modelItem: DetSchema) => {
       const item: Item = {
-        itemEAN: modelItem.prod.cEAN?.text,
-        itemDescricao: modelItem.prod.xProd?.text,
-        itemNCM: modelItem.prod.NCM?.text,
-        itemCFOP: modelItem.prod.CFOP?.text,
-        itemUnidade: modelItem.prod.uCom?.text,
-        itemQuantidade: modelItem.prod.qCom?.text,
-        itemVUnit: modelItem.prod.vUnCom?.text,
-        itemVTotal: modelItem.prod.vProd?.text,
-        imposto: {},
+        itemEAN: modelItem.prod.cean,
+        itemDescricao: modelItem.prod.xprod,
+        itemNCM: modelItem.prod.ncm,
+        itemCFOP: modelItem.prod.cfop,
+        itemUnidade: modelItem.prod.ucom,
+        itemQuantidade: Formatter.toBrlCurrency(+modelItem.prod.qcom),
+        itemVUnit: Formatter.toBrlCurrency(+modelItem.prod.vuncom),
+        itemVDesc: Formatter.toBrlCurrency(+modelItem.prod.vdesc),
+        itemVTotal: Formatter.toBrlCurrency(+modelItem.prod.vprod),
+        itemCSTPIS:
+          modelItem.imposto.pis?.pisaliq?.cst ??
+          modelItem.imposto.pis?.pisqtde?.cst ??
+          modelItem.imposto.pis?.pisnt?.cst ??
+          modelItem.imposto.pis?.pisoutr?.cst,
+        itemCSTCOFINS:
+          modelItem.imposto.cofins?.cofinsaliq?.cst ??
+          modelItem.imposto.cofins?.cofinsqtde?.cst ??
+          modelItem.imposto.cofins?.cofinsnt?.cst ??
+          modelItem.imposto.cofins?.cofinsoutr?.cst,
+        itemICMSCST:
+          modelItem.imposto.icms.icms?.cst ??
+          modelItem.imposto.icms.icmspart?.cst ??
+          modelItem.imposto.icms.icmsst?.cst ??
+          modelItem.imposto.icms.icmssn?.csosn,
+        itemICMSOrig:
+          modelItem.imposto.icms.icms?.orig ??
+          modelItem.imposto.icms.icmspart?.orig ??
+          modelItem.imposto.icms.icmsst?.orig ??
+          modelItem.imposto.icms.icmssn?.orig
       };
       this.items.push(item);
     });
