@@ -58,7 +58,7 @@ Realize as requisições em [http://localhost:3000](http://localhost:3000) para 
 * `fieldDelimiter` - (Opcional) Define qual o delimitador utilizado no CSV
     * default: `,`
 * `unwindArrays` - (Opcional) Boolean - Define se deve ser gerado com multiplas linhas para arrays de items nos documentos
-    * default: `false`
+    * default: `true`
 * `includeTotalizerRow` - (Opcional) Boolean - Define se o relatório deve possuir um linha de valores totalizadores
     * default: `false`
 
