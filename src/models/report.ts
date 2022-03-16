@@ -40,8 +40,9 @@ export class Report {
   public generate(
     keys: string[] = [],
     excludeKeys: string[] = [],
-    unwindArrays = false,
     fieldDelimiter = ',',
+    includeTotalizerRow = false,
+    unwindArrays = true,
   ) {
     this.setKeys(keys);
     this.setExcludeKeys(excludeKeys);
@@ -50,7 +51,10 @@ export class Report {
       field: fieldDelimiter,
     };
 
-    this.documents.addTotalizerRow();
+    if (includeTotalizerRow) {
+      this.documents.addTotalizerRow();
+    }
+
     const rows = this.documents.list.flat();
 
     return jsonParser.toCsv(rows, this.options);

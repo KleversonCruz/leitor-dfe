@@ -19,8 +19,9 @@ export class ReportController {
       checkIfExistFilesInRequest(req);
       const keys = getKeysArray(req.body?.keys);
       const excludeKeys = getKeysArray(req.body?.excludeKeys);
-      const unwindArrays = req.body?.unwindArrays;
       const fieldDelimiter = req.body?.fieldDelimiter;
+      const includeTotalizerRow = getKeyBoolean(req.body?.includeTotalizerRow);
+      const unwindArrays = getKeyBoolean(req.body?.unwindArrays);
 
       const { xml: files } = req.files;
 
@@ -28,8 +29,9 @@ export class ReportController {
       const report = await new Report(documents).generate(
         keys,
         excludeKeys,
-        unwindArrays,
         fieldDelimiter,
+        includeTotalizerRow,
+        unwindArrays,
       );
 
       const attachment: AttachmentFile = {
@@ -46,7 +48,14 @@ export class ReportController {
   }
 }
 
-function getKeysArray(keys: any) {
+function getKeyBoolean(key: string) {
+  if (!key) {
+    return undefined;
+  }
+  return key === 'true' ? true : false;
+}
+
+function getKeysArray(keys: string) {
   if (!keys) {
     return [];
   }

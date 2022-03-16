@@ -56,7 +56,7 @@ export class NFeMapping implements DfeModel {
         itemQuantidade: +modelItem.prod.qcom,
         itemVUnit: +modelItem.prod.vuncom,
         itemVDesc: +modelItem.prod.vdesc,
-        itemVTotal: +modelItem.prod.vprod,
+        itemVTotal: +modelItem.prod.vprod - (+modelItem.prod.vdesc || 0),
         itemCSTPIS:
           modelItem.imposto.pis?.pisaliq?.cst ??
           modelItem.imposto.pis?.pisqtde?.cst ??

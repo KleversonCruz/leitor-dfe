@@ -35,14 +35,16 @@ class Report {
             });
         }
     }
-    generate(keys = [], excludeKeys = [], unwindArrays = false, fieldDelimiter = ',') {
+    generate(keys = [], excludeKeys = [], fieldDelimiter = ',', includeTotalizerRow = false, unwindArrays = true) {
         this.setKeys(keys);
         this.setExcludeKeys(excludeKeys);
         this.options.unwindArrays = unwindArrays;
         this.options.delimiter = {
             field: fieldDelimiter,
         };
-        this.documents.addTotalizerRow();
+        if (includeTotalizerRow) {
+            this.documents.addTotalizerRow();
+        }
         const rows = this.documents.list.flat();
         return json_parser_1.jsonParser.toCsv(rows, this.options);
     }
