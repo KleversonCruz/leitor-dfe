@@ -24,7 +24,7 @@ export class CFeMapping implements DfeModel {
       nNF: model.ide?.ncfe,
       modelo: model.ide.mod,
       dtEmissao: Formatter.toLocaleDate(model.ide.demi),
-      vDocumento: Formatter.toBrlCurrency(+model.total.vcfe),
+      vDocumento: +model.total.vcfe,
     };
 
     this.emit = {
@@ -52,10 +52,10 @@ export class CFeMapping implements DfeModel {
         itemNCM: modelItem.prod.ncm,
         itemCFOP: modelItem.prod.cfop,
         itemUnidade: modelItem.prod.ucom,
-        itemQuantidade: Formatter.toBrlCurrency(+modelItem.prod.qcom),
-        itemVUnit: Formatter.toBrlCurrency(+modelItem.prod.vuncom),
-        itemVDesc: Formatter.toBrlCurrency(+modelItem.prod.vdesc),
-        itemVTotal: Formatter.toBrlCurrency(+modelItem.prod.vitem),
+        itemQuantidade: +modelItem.prod.qcom,
+        itemVUnit: +modelItem.prod.vuncom,
+        itemVDesc: +modelItem.prod.vdesc,
+        itemVTotal: +modelItem.prod.vitem,
         itemCSTPIS:
           modelItem.imposto.pis?.pisaliq?.cst ??
           modelItem.imposto.pis?.pisqtde?.cst ??

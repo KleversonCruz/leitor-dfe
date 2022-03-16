@@ -1,11 +1,11 @@
 export interface Item {
   itemEAN?: string;
-  itemDescricao: string;
+  itemDescricao?: string;
   itemUnidade?: string;
-  itemQuantidade?: string;
-  itemVUnit?: string;
-  itemVDesc?: string;
-  itemVTotal?: string;
+  itemQuantidade?: number;
+  itemVUnit?: number;
+  itemVDesc?: number;
+  itemVTotal?: number;
 
   itemNCM?: string;
   itemCFOP?: string;

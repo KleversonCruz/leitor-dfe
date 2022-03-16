@@ -24,7 +24,7 @@ export class NFeMapping implements DfeModel {
       nNF: model.ide.cnf,
       modelo: model.ide.mod,
       dtEmissao: Formatter.toLocaleDate(model.ide.dhemi),
-      vDocumento: Formatter.toBrlCurrency(+model.total.icmstot.vnf),
+      vDocumento: +model.total.icmstot.vnf,
     };
     this.emit = {
       emitCNPJ: Formatter.toCpfCnpjMask(model.emit.cnpj),
@@ -34,9 +34,7 @@ export class NFeMapping implements DfeModel {
     };
 
     this.dest = {
-      destCPFCNPJ: Formatter.toCpfCnpjMask(
-        model.dest?.cnpj ?? model.dest?.cpf,
-      ),
+      destCPFCNPJ: Formatter.toCpfCnpjMask(model.dest?.cnpj ?? model.dest?.cpf),
       destNome: model.dest?.xnome,
       destMun: model.dest?.enderdest.xmun,
       destUF: model.dest?.enderdest.uf,
@@ -55,10 +53,10 @@ export class NFeMapping implements DfeModel {
         itemNCM: modelItem.prod.ncm,
         itemCFOP: modelItem.prod.cfop,
         itemUnidade: modelItem.prod.ucom,
-        itemQuantidade: Formatter.toBrlCurrency(+modelItem.prod.qcom),
-        itemVUnit: Formatter.toBrlCurrency(+modelItem.prod.vuncom),
-        itemVDesc: Formatter.toBrlCurrency(+modelItem.prod.vdesc),
-        itemVTotal: Formatter.toBrlCurrency(+modelItem.prod.vprod),
+        itemQuantidade: +modelItem.prod.qcom,
+        itemVUnit: +modelItem.prod.vuncom,
+        itemVDesc: +modelItem.prod.vdesc,
+        itemVTotal: +modelItem.prod.vprod,
         itemCSTPIS:
           modelItem.imposto.pis?.pisaliq?.cst ??
           modelItem.imposto.pis?.pisqtde?.cst ??
@@ -78,7 +76,7 @@ export class NFeMapping implements DfeModel {
           modelItem.imposto.icms.icms?.orig ??
           modelItem.imposto.icms.icmspart?.orig ??
           modelItem.imposto.icms.icmsst?.orig ??
-          modelItem.imposto.icms.icmssn?.orig
+          modelItem.imposto.icms.icmssn?.orig,
       };
       this.items.push(item);
     });

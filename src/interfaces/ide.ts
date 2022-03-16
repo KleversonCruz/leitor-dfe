@@ -5,5 +5,5 @@ export interface Ide {
   nNF?: string;
   modelo?: string;
   dtEmissao?: string;
-  vDocumento?: string
+  vDocumento?: number
 }

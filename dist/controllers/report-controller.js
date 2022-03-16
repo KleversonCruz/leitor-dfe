@@ -16,16 +16,17 @@ const xml_parser_1 = require("../utils/xml-parser");
 const report_1 = require("../models/report");
 class ReportController {
     static generateReport(req, res, next) {
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 checkIfExistFilesInRequest(req);
                 const keys = getKeysArray((_a = req.body) === null || _a === void 0 ? void 0 : _a.keys);
                 const excludeKeys = getKeysArray((_b = req.body) === null || _b === void 0 ? void 0 : _b.excludeKeys);
                 const unwindArrays = (_c = req.body) === null || _c === void 0 ? void 0 : _c.unwindArrays;
+                const fieldDelimiter = (_d = req.body) === null || _d === void 0 ? void 0 : _d.fieldDelimiter;
                 const { xml: files } = req.files;
                 const documents = getDocumentsFromFiles(files);
-                const report = yield new report_1.Report(documents).generate(keys, excludeKeys, unwindArrays);
+                const report = yield new report_1.Report(documents).generate(keys, excludeKeys, unwindArrays, fieldDelimiter);
                 const attachment = {
                     name: 'report.csv',
                     data: Buffer.from(report),

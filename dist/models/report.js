@@ -15,6 +15,9 @@ class Report {
             trimHeaderFields: true,
             emptyFieldValue: '',
             keys: report_mapping_1.ReportMapping.getKeys(),
+            excelBOM: true,
+            preventCsvInjection: true,
+            useLocaleFormat: true
         };
     }
     setKeys(keys) {
@@ -31,11 +34,15 @@ class Report {
             });
         }
     }
-    generate(keys = [], excludeKeys = [], unwindArrays = false) {
+    generate(keys = [], excludeKeys = [], unwindArrays = false, fieldDelimiter = ',') {
         this.setKeys(keys);
         this.setExcludeKeys(excludeKeys);
         this.options.unwindArrays = unwindArrays;
-        const rows = this.documents.list().flat();
+        this.options.delimiter = {
+            field: fieldDelimiter,
+        };
+        this.documents.addTotalizerRow();
+        const rows = this.documents.list.flat();
         return json_parser_1.jsonParser.toCsv(rows, this.options);
     }
 }

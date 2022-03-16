@@ -17,6 +17,7 @@ export class Report {
     keys: ReportMapping.getKeys(),
     excelBOM: true,
     preventCsvInjection: true,
+    useLocaleFormat: true
   };
 
   private setKeys(keys: string[]) {
@@ -48,7 +49,9 @@ export class Report {
       field: fieldDelimiter,
     };
 
-    const rows = this.documents.list().flat();
+    this.documents.addTotalizerRow();
+    const rows = this.documents.list.flat();
+
     return jsonParser.toCsv(rows, this.options);
   }
 }
