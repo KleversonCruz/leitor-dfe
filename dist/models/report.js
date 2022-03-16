@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Report = void 0;
 const report_mapping_1 = require("../mappings/report-mapping");
+const formatter_1 = require("../utils/formatter");
 const json_parser_1 = require("../utils/json-parser");
 class Report {
     constructor(documents) {
@@ -17,7 +18,7 @@ class Report {
             keys: report_mapping_1.ReportMapping.getKeys(),
             excelBOM: true,
             preventCsvInjection: true,
-            useLocaleFormat: true
+            parseValue: (value) => formatter_1.Formatter.toBrlCurrency(value),
         };
     }
     setKeys(keys) {

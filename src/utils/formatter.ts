@@ -1,8 +1,5 @@
 export class Formatter {
   public static toBrlCurrency(value: number): string {
-    if (!value) {
-      return '0';
-    }
     return value.toLocaleString('pt-br', { minimumFractionDigits: 2 });
   }
 

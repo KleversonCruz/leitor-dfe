@@ -3,9 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Formatter = void 0;
 class Formatter {
     static toBrlCurrency(value) {
-        if (!value) {
-            return '0';
-        }
         return value.toLocaleString('pt-br', { minimumFractionDigits: 2 });
     }
     static toLocaleDate(dateString) {

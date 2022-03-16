@@ -1,5 +1,6 @@
 import { ReportOptions } from '../interfaces/report-options';
 import { ReportMapping } from '../mappings/report-mapping';
+import { Formatter } from '../utils/formatter';
 import { jsonParser } from '../utils/json-parser';
 import { Dfes } from './dfes';
 
@@ -17,7 +18,7 @@ export class Report {
     keys: ReportMapping.getKeys(),
     excelBOM: true,
     preventCsvInjection: true,
-    useLocaleFormat: true
+    parseValue: (value: number) => Formatter.toBrlCurrency(value),
   };
 
   private setKeys(keys: string[]) {
