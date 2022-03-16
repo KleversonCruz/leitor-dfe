@@ -3,9 +3,9 @@
 ## Descrição do projeto
 
 <p align="justify"> 
-API REST desenvolvida para uso em revenda de softwares de automação comercial, onde há necessídade do envio dos arquivos XML de documentos físcais junto a uma relatório para escritórios de contabilidade.
+API REST desenvolvida para uso em revenda de softwares de automação comercial, onde há necessidade do envio dos arquivos XML de documentos fiscais junto a um relatório para escritórios de contabilidade.
     
-Este projeto realiza a leitura de XMLs de documentos físcais e converte para um arquivo CSV. É possível gerar relatórios com diferentes modelos de documentos(NFC-e, NF-e, CF-e SAT) em um único arquivo.
+Este projeto realiza a leitura de XMLs de documentos fiscais e converte para um arquivo CSV. É possível gerar relatórios com diferentes modelos de documentos(NFC-e, NF-e, CF-e SAT) em um único arquivo.
 </p>
 
 ## Funcionalidades
