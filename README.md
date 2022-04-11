@@ -1,38 +1,28 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
+# Relatórios para documentos fiscais eletrônicos
+
+## Descrição do projeto
+
+<p align="justify"> 
+API REST desenvolvida para uso em revenda de softwares de automação comercial, onde havia necessidade do envio dos arquivos XML de documentos fiscais junto a um relatório para escritórios de contabilidade.
+    
+Este projeto realiza a leitura de XMLs de documentos fiscais e converte para um arquivo CSV. É possível gerar relatórios com diferentes modelos de documentos(NFC-e, NF-e, CF-e SAT) em um único arquivo.
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Funcionalidades
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+:heavy_check_mark: Relatórios em CSV a partir de Documentos Fiscais Eletrônicos.
 
-## Description
+:heavy_check_mark: Compatível com XMLs de NF-e, CF-e SAT e NFC-e.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+:heavy_check_mark: Personalizar campos e delimitadores do arquivo CSV.
 
-## Installation
+## Instalação
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+## Executando o projeto
 
 ```bash
 # development
@@ -58,16 +48,39 @@ $ npm run test:e2e
 $ npm run test:cov
 ```
 
-## Support
+## REST API
+`POST /report/csv`
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+### Request
+```bash
+curl -X 'POST'
+  'https://dfe-reader-nodejs.herokuapp.com/report/csv'
+  -H 'Content-Type: multipart/form-data'
+  -F 'keys=emitCNPJ,status,dtEmissao,itemVTotal'
+  -F 'fieldDelimiter=;'
+  -F 'totalizerRow=true'
+  -F 'files=@NFCe.xml;type=text/xml'
+```
 
-## Stay in touch
+### Responses
+    Code 201
+    
+    Response headers:
+     content-disposition: attachment; filename=report.csv 
+     content-length: 142 
+     content-type: text/csv; charset=utf-8 
+    
+    Response body:
+      emitCNPJ;status;dtEmissao;itemVTotal
+      11.111.111/1111-11;AUTORIZADO;03/05/2021;25,16
+      11.111.111/1111-11;AUTORIZADO;03/05/2021;16,29
+      ;;;41,45
+      
+A documentação completa pode ser acessada em [Swagger UI](https://dfe-reader-nodejs.herokuapp.com/api)
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### Paramêtros
 
-## License
-
-Nest is [MIT licensed](LICENSE).
+* `files` - Um ou mais arquivos XML a serem convertidos
+* `keys` - (Opcional) Array separado por vingulas de campos a serem gerados no relatório
+* `fieldDelimiter` - (Opcional) Define qual o delimitador utilizado no CSV
+* `includeTotalizerRow` - (Opcional) Boolean - Define se o relatório deve possuir um linha de valores totalizadores
