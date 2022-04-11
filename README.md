@@ -1,7 +1,5 @@
 # Relatórios para documentos fiscais eletrônicos
 
-## Descrição do projeto
-
 <p align="justify"> 
 API REST desenvolvida para uso em revenda de softwares de automação comercial, onde havia necessidade do envio dos arquivos XML de documentos fiscais junto a um relatório para escritórios de contabilidade.
     
