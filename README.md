@@ -14,13 +14,13 @@ Este projeto realiza a leitura de XMLs de documentos fiscais e converte para um 
 
 :heavy_check_mark: Personalizar campos e delimitadores do arquivo CSV.
 
-## Instalação
+## Instalando
 
 ```bash
 $ npm install
 ```
 
-## Executando o projeto
+## Executando
 
 ```bash
 # development
@@ -33,7 +33,7 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
-## Test
+## Testando
 
 ```bash
 # unit tests
