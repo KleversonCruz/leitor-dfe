@@ -1,4 +1,4 @@
-FROM node:14-alpine As development
+FROM node:16-alpine As development
 
 WORKDIR /usr/src
 
