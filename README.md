@@ -1,65 +1,73 @@
-# Relatórios para documentos físcais eletrônicos
-
-## Descrição do projeto
-
-<p align="justify"> 
-API REST desenvolvida para uso em revenda de softwares de automação comercial, onde há necessidade do envio dos arquivos XML de documentos fiscais junto a um relatório para escritórios de contabilidade.
-    
-Este projeto realiza a leitura de XMLs de documentos fiscais e converte para um arquivo CSV. É possível gerar relatórios com diferentes modelos de documentos(NFC-e, NF-e, CF-e SAT) em um único arquivo.
+<p align="center">
+  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
 </p>
 
-## Funcionalidades
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-:heavy_check_mark: Relatórios em CSV a partir de Documentos Fiscais Eletrônicos.
+  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+    <p align="center">
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
+<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
+<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
+<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
+<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
+<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
+<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
+  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
+    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
+  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
+</p>
+  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
+  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-:heavy_check_mark: Compatível com XMLs de NF-e, CF-e SAT e NFC-e.
+## Description
 
-:heavy_check_mark: Personalizar campos e delimitadores do arquivo CSV.
+[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Instalando e executando o projeto
+## Installation
 
 ```bash
-npm install
+$ npm install
 ```
+
+## Running the app
 
 ```bash
-npm run dev
+# development
+$ npm run start
+
+# watch mode
+$ npm run start:dev
+
+# production mode
+$ npm run start:prod
 ```
-Realize as requisições em [http://localhost:3000](http://localhost:3000) para obter o resultado.
 
-## REST API
+## Test
 
-### Request
+```bash
+# unit tests
+$ npm run test
 
-`POST /report/`
+# e2e tests
+$ npm run test:e2e
 
-    curl --location --request POST 'localhost:3000/report' \--form 'xml=@""'
+# test coverage
+$ npm run test:cov
+```
 
-### Response
+## Support
 
-    Headers:
-    Status: 200 OK
-    Date: TWed, 16 Mar 2022 21:44:20 GMT
-    Content-Disposition: attachment; filename="report.csv"
-    Connection: keep-alive
-    Content-Type: text/csv
-    
-    Body:
-    emitCNPJ,emitNome,emitMun...
-    11.111.111/1111-11,EMITENTE TESTE,SAO PAULO...
+Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
-### Paramêtros
+## Stay in touch
 
-* `xml` - Um ou mais arquivos XML a serem convertidos para CSV.
-* `keys` - (Opcional) Array separado por vingulas de campos a serem gerados no relatório.
-    * `emitCNPJ, emitNome, ...`
-* `excludeKeys` - (Opcional) Array separado por vingulas de campos que não serão gerados no relatório
-    * `emitCNPJ, emitNome, ...`
-* `fieldDelimiter` - (Opcional) Define qual o delimitador utilizado no CSV
-    * default: `,`
-* `unwindArrays` - (Opcional) Boolean - Define se deve ser gerado com multiplas linhas para arrays de items nos documentos
-    * default: `true`
-* `includeTotalizerRow` - (Opcional) Boolean - Define se o relatório deve possuir um linha de valores totalizadores
-    * default: `false`
+- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
+- Website - [https://nestjs.com](https://nestjs.com/)
+- Twitter - [@nestframework](https://twitter.com/nestframework)
 
+## License
 
+Nest is [MIT licensed](LICENSE).

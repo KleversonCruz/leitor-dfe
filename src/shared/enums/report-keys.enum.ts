@@ -1,0 +1,30 @@
+export enum ReportKeysEnum {
+  emitCNPJ = 'emit.emitCNPJ',
+  emitNome = 'emit.emitNome',
+  emitMun = 'emit.emitMun',
+
+  status = 'ide.status',
+  mod = 'ide.modelo',
+  nNF = 'ide.nNF',
+  serie = 'ide.serie',
+  chave = 'ide.chave',
+  dtEmissao = 'ide.dtEmissao',
+  vDocumento = 'ide.vDocumento',
+
+  destCPFCNPJ = 'dest.destCPFCNPJ',
+  destNome = 'dest.destNome',
+
+  itemEAN = 'items.itemEAN',
+  itemDescricao = 'items.itemDescricao',
+  itemUnidade = 'items.itemUnidade',
+  itemQuantidade = 'items.itemQuantidade',
+  itemVUnit = 'items.itemVUnit',
+  itemVDesc = 'items.itemVDesc',
+  itemVTotal = 'items.itemVTotal',
+  itemNCM = 'items.itemNCM',
+  itemCFOP = 'items.itemCFOP',
+  itemCSTPIS = 'items.itemCSTPIS',
+  itemCSTCOFINS = 'items.itemCSTCOFINS',
+  itemICMSCST = 'items.itemICMSCST',
+  itemICMSOrig = 'items.itemICMSOrig',
+}
