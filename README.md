@@ -1,4 +1,7 @@
 # Relatórios para documentos fiscais eletrônicos
+![Badge Concluído](http://img.shields.io/static/v1?label=STATUS&message=CONCLUÍDO&color=GREEN&style=for-the-badge)
+![Badge NodeJs](http://img.shields.io/static/v1?label=NodeJS&message=16.14.0&color=GREEN&style=for-the-badge)
+![Badge NestJS](http://img.shields.io/static/v1?label=NestJS&message=8.2.4&color=red&style=for-the-badge)
 
 <p align="justify"> 
 API REST desenvolvida para uso em revenda de softwares de automação comercial, onde havia necessidade do envio dos arquivos XML de documentos fiscais junto a um relatório para escritórios de contabilidade.
