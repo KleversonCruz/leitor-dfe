@@ -44,4 +44,5 @@ export class ReportJsDto {
   items?: Item[];
   ide?: Ide;
   dest?: Dest;
+  valorTotal?: number;
 }

@@ -1,0 +1,111 @@
+<main>
+
+  <div class='container-xl px-4 mt-5'>
+
+    <div class='card mb-4 border-0'>
+      <div class='card-body'>
+        <div class='justify-content-center'>
+          <div class='text-center'>
+            <h5>Importar documentos</h5>
+            <p class='mb-4'>Realize o upload de XMLs de CFe-SAT, NF-e ou NFC-e
+              para gerar relatórios em CSV</p>
+          </div>
+        </div>
+        <form
+          class='form mb-4'
+          action='/'
+          method='post'
+          enctype='multipart/form-data'
+        >
+          <div class='input-group mb-3'>
+            <input
+              class='form-control rounded-pill rounded-end'
+              id='formFile'
+              name='files'
+              type='file'
+              multiple='true'
+              accept='.xml'
+            />
+            <button
+              class='btn btn-primary rounded-pill rounded-start'
+              type='submit'
+            >Importar</button>
+          </div>
+        </form>
+        {{#if error}}
+          <div class='alert alert-warning' role='alert'>
+            {{error}}
+          </div>
+        {{/if}}
+      </div>
+    </div>
+
+    {{#if convertedXml}}
+      <div class='card mb-4 border-0'>
+        <div class='card-body'>
+          <div class='justify-content-center mb-4'>
+            <div class='text-center'>
+              <h5>Seu relatório está pronto!</h5>
+              <p class='mb-4'>Seus documentos físcais foram convertidos para um
+                relatório CSV, utilize o botão abaixo para exporta-lo.</p>
+              <form action='/download' method='get'>
+                <button class='btn btn-primary rounded-pill' type='submit'>
+                  <i class='fa-solid fa-arrow-down pe-2'></i>
+                  Download
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div class='table-responsive'>
+            <table class='table table-borderless'>
+              <thead class='border-bottom'>
+                <tr class='small text-uppercase text-muted'>
+                  <th scope='col'>Detalhes</th>
+                  <th scope='col' class='text-end'>Data emissão</th>
+                  <th scope='col' class='text-end'>CNPJ Emitente</th>
+                  <th scope='col' class='text-end'>Valor</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each convertedXml}}
+                  <tr class='border-bottom'>
+                    <td>
+                      <div class='fw-bold d-none d-md-block'>
+                        {{this.ide.chave}}
+                      </div>
+                      <div class='small text-muted'>
+                        Modelo:
+                        {{this.ide.modelo}}
+                        / Nº documento:
+                        {{this.ide.nNF}}
+                        / Nº Série:
+                        {{this.ide.modelo}}
+                      </div>
+                    </td>
+                    <td
+                      class='fw-bold text-end align-middle'
+                    >{{this.emit.emitCNPJ}}</td>
+                    <td
+                      class='fw-bold text-end align-middle'
+                    >{{this.ide.dtEmissao}}</td>
+                    <td class='fw-bold text-end align-middle'>R$
+                      {{this.ide.vDocumento}}</td>
+                  </tr>
+                {{/each}}
+                <tr>
+                  <td class='text-end pb-0' colspan='3'><div
+                      class='text-uppercase small fw-700 text-muted'
+                    >Total:</div></td>
+                  <td class='text-end pb-0'><div
+                      class='h5 mb-0 fw-700 text-green'
+                    >R$ {{totalValue}}</div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+</main>

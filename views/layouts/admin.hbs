@@ -1,0 +1,37 @@
+<html lang='pt-br'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+    <script
+      data-search-pseudo-elements=''
+      defer=''
+      src='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js'
+      crossorigin='anonymous'
+    ></script>
+    <link rel='stylesheet' type='text/css' href='/styles.css' />
+    <link rel="icon" href="/icon.png">
+
+    <title>Leitor de DF-e</title>
+  </head>
+
+  <body class='nav-fixed bg-white'>
+    {{> navbar }}
+    <div id='layoutSidenav'>
+      <div id='layoutSidenav_content'>
+        {{{body}}}
+
+        <footer class='footer-admin mt-auto footer-light'>
+          <div class='container-xl px-4'>
+            <div class='row'>
+              <div class='col-md-6 small'>Leitor de DF-e - Esse projeto está disponível no
+                <a class='fw-500' href='https://github.com/KleversonCruz/dfe-reader-nodejs' target="_blank">GitHub</a>, sinta-se livre para contribuir.
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </body>
+
+</html>
