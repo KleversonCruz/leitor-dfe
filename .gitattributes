@@ -1,0 +1,15 @@
+*.css linguist-detectable=false
+input/*.css linguist-detectable=false
+output/*.css linguist-detectable=false
+
+*.hbs linguist-detectable=false
+input/*.hbs linguist-detectable=false
+output/*.hbs linguist-detectable=false
+
+Procfile linguist-detectable=false
+input/Procfile linguist-detectable=false
+output/Procfile linguist-detectable=false
+
+Procfile linguist-detectable=false
+input/Procfile linguist-detectable=false
+output/Procfile linguist-detectable=false
