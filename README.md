@@ -55,7 +55,7 @@ $ npm run test:cov
 ### Request
 ```bash
 curl -X 'POST'
-  'https://dfe-reader-nodejs.herokuapp.com/report/csv'
+  'https://localhost:3000/report/csv'
   -H 'Content-Type: multipart/form-data'
   -F 'keys=emitCNPJ,status,dtEmissao,itemVTotal'
   -F 'fieldDelimiter=;'
@@ -77,7 +77,6 @@ curl -X 'POST'
       11.111.111/1111-11;AUTORIZADO;03/05/2021;16,29
       ;;;41,45
       
-A documentação completa pode ser acessada em [Swagger UI](https://dfe-reader-nodejs.herokuapp.com/api)
 
 ### Paramêtros
 
